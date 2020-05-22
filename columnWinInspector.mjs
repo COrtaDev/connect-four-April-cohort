@@ -28,10 +28,3 @@ export class ColumnWinInspector {
         return 0;
     }
 }
-
-// [null, null, 1, 1, 1, 1,]
-// [null, 1, 1, 1, 1, 2,]
-// [1, 1, 1, 1, 2, 2,]
-// let currentColumn = this.columns[i]
-// currentColumn.join() << 111122, null11112, nullnull1111
-// console.log(this.column[i])

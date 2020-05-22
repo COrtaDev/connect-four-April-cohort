@@ -1,6 +1,6 @@
 import { Column } from './column.mjs';
 import { ColumnWinInspector } from './columnWinInspector.mjs';
-
+import { RowWinInspector } from './rowWinInspector.mjs';
 export class Game {
     constructor(name1, name2) {
         this.name1 = name1;
@@ -36,11 +36,20 @@ export class Game {
         for (let i = 0; i < this.columns.length; i++) {
             let currentColumn = this.columns[i];
             let columnWinInspector = new ColumnWinInspector(currentColumn);
-            // columnWinInspector.inspect();//<<--this return the player who won or 0 if no one did
-            // console.log(columnWinInspector.inspect());
+
             if (columnWinInspector.inspect() > 0) {
                 this.winnerNumber = columnWinInspector.inspect();
                 return;
+            }
+        }
+    }
+
+    checkForRowWin() {
+        for (let i = 0; i <= 3; i++) {
+            let currentRow = this.columns.slice(i, i + 4);
+            let rowWinInspector = new RowWinInspector(currentRow);
+            if (rowWinInspector.columnsLookAt() > 0) {
+                this.winnerNumber = rowWinInspector.columnsLookAt();
             }
         }
     }
@@ -55,6 +64,7 @@ export class Game {
         }
         this.checkForTie();
         this.checkForColumnWin();
+        this.checkForRowWin();
     }
 
     getTokenAt(rowIndex, columnIndex) {
@@ -71,7 +81,7 @@ export class Game {
 
     checkForTie() {
         for (let i = 0; i <= 6; i++) {
-            if (!this.isColumnFull(i)) {//<<--this returns as soon as the loop finds a column that is not full
+            if (!this.isColumnFull(i)) {
                 return false;
             }
         }

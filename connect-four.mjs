@@ -49,7 +49,6 @@ function updateUI() {
     if (game.winnerNumber > 0) {
         gameName.innerHTML = game.getWinner();
     }
-    // game.checkForColumnWin();
 }
 
 window.addEventListener("DOMContentLoaded", event => {
