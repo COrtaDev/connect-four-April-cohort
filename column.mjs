@@ -1,5 +1,5 @@
 export class Column {
-    constructor(playerNum) {
+    constructor() {
         this.tokens = [
             null,
             null,
@@ -8,7 +8,6 @@ export class Column {
             null,
             null
         ];
-        this.playerNum = playerNum;
     }
 
     add(playerNum) {

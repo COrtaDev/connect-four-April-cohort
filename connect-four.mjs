@@ -46,6 +46,10 @@ function updateUI() {
             selectedColumn.classList.remove("full");
         }
     }
+    if (game.winnerNumber > 0) {
+        gameName.innerHTML = game.getWinner();
+    }
+    // game.checkForColumnWin();
 }
 
 window.addEventListener("DOMContentLoaded", event => {
