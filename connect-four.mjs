@@ -40,6 +40,7 @@ function updateUI() {
     }
     for (let i = 0; i <= 6; i++) {
         let selectedColumn = document.getElementById(`column-${i}`);
+
         if (game.isColumnFull(i)) {
             selectedColumn.classList.add("full");
         } else {
@@ -82,6 +83,10 @@ window.addEventListener("DOMContentLoaded", event => {
     });
 
     clickTargets.addEventListener("click", event => {
+        if (event.target.outerHTML.includes("full")) {
+            event.preventDefault();
+            return;
+        }
         if (event.target.id.startsWith("column-")) {
             const columnIndex = Number.parseInt(event.target.id.slice(event.target.id.length - 1));
             game.playInColumn(columnIndex);

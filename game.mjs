@@ -1,6 +1,8 @@
 import { Column } from './column.mjs';
 import { ColumnWinInspector } from './columnWinInspector.mjs';
 import { RowWinInspector } from './rowWinInspector.mjs';
+import { DiagonalWinInspector } from './diagonalWinInspector.mjs';
+
 export class Game {
     constructor(name1, name2) {
         this.name1 = name1;
@@ -39,7 +41,7 @@ export class Game {
 
             if (columnWinInspector.inspect() > 0) {
                 this.winnerNumber = columnWinInspector.inspect();
-                return;
+                return true;
             }
         }
     }
@@ -50,7 +52,25 @@ export class Game {
             let rowWinInspector = new RowWinInspector(currentRow);
             if (rowWinInspector.columnsLookAt() > 0) {
                 this.winnerNumber = rowWinInspector.columnsLookAt();
+                return true;
             }
+        }
+    }
+
+    checkForDiagonalWin() {
+        for (let i = 0; i <= 3; i++) {
+            let boardToCheck = this.columns.slice(i, i + 4);
+            let diagonalWinInspector = new DiagonalWinInspector(boardToCheck);
+            diagonalWinInspector.lookAtBoard();
+            if (diagonalWinInspector.lookAtBoard() > 0) {
+                this.winnerNumber = diagonalWinInspector.lookAtBoard();
+                return true;
+            }
+            // console.log(diagonalWinInspector);
+            // if (rowWinInspector.columnsLookAt() > 0) {
+            //     this.winnerNumber = rowWinInspector.columnsLookAt();
+            //     return true;
+            // }
         }
     }
 
@@ -65,6 +85,7 @@ export class Game {
         this.checkForTie();
         this.checkForColumnWin();
         this.checkForRowWin();
+        this.checkForDiagonalWin();
     }
 
     getTokenAt(rowIndex, columnIndex) {

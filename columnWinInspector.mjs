@@ -4,9 +4,6 @@ export class ColumnWinInspector {
     }
 
     inspect() {
-        // console.log(this.column)//<<--this.column is an obj
-        // console.log(this.column.tokens)//<<--this.column is an obj
-        // this.column.tokens
         let redCount = 0;
         let blackCount = 0;
 
